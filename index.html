@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <script src="./script.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <table>
+    <caption><h1>Library</h1></caption>
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Have Read</th>
+        <th scope="col">Pages</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+      <tr>
+        <th scope="row" colspan="3">Total Pages</th>
+        <td>100</td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="add-book">
+    <button class="add-button" type="button">Add Book</button>
+    <form action="" method="post">
+      <div class="form-row">
+        <label for="title">Title: </label>
+        <input type="text" size="25" id="title">
+      </div>
+      <div class="form-row">
+        <label for="author">Author: </label>
+        <input type="text" size="25" id="author">
+      </div>
+      <div class="form-row">
+        <label for="pages"># of Pages: </label>
+        <div>
+          <input type="number" id="pages" min="1" max="10000" size="6">
+          <div>
+            <label for="checkbox">Have Read: </label>
+            <input type="checkbox" id="checkbox">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <button class="submit" type='button'>Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
