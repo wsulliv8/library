@@ -72,7 +72,7 @@ function displayBooks(numbBooks = myLibrary.length) {
       //update DOM data attribute and myLibrary
       let index = +event.target.dataset.index;
       let buttons = document.querySelectorAll('.material-icons.close');
-      let switches = document.querySelectorAll('switch input');
+      let switches = document.querySelectorAll('#switch input');
       for (let j = index; j<buttons.length; j++) {
         buttons[j].dataset.index--;
         switches[j].dataset.index--;
