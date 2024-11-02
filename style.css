@@ -38,12 +38,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root {
+  --color-icon-gray: #5a5f61;
+  --color-icon-red: #8d2424;
   --color-tan: #e5e5e5;
   --color-gray: #737a7d;
   --color-dark-blue: #72bfd7;
   --color-light-blue: #b3e4e7;
   --color-black: #091f29;
   --color-green: #344317;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
 
 body {
@@ -57,7 +67,7 @@ body {
 
 table {
   table-layout: fixed;
-  width: clamp(400px, 70%, 800px);
+  width: clamp(450px, 85%, 800px);
   border-collapse: collapse;
   position: relative;
 }
@@ -75,11 +85,11 @@ tfoot {
 }
 
 thead th:nth-child(1) {
-  width: 35%;
+  width: 20%;
 }
 
 thead th:nth-child(2) {
-  width: 35%;
+  width: 20%;
 }
 
 thead th:nth-child(3) {
@@ -87,6 +97,10 @@ thead th:nth-child(3) {
 }
 
 thead th:nth-child(4) {
+  width: 15%;
+}
+
+thead th:nth-child(5) {
   width: 15%;
 }
 
@@ -100,9 +114,12 @@ tbody tr:nth-child(2n) {
   background-color: var(--color-tan);
 }
 
-th,
 td {
-  padding: 20px;
+  padding: 0.5rem;
+}
+
+th {
+  padding: 0.8rem;
 }
 
 tfoot th{
@@ -129,9 +146,29 @@ table tfoot td:last-child {
   border-bottom-right-radius: 14px;
 }
 
+.action-button {
+  background-color: transparent;
+  border: none;
+  height: 24px;
+}
+
+.material-icons {
+  color: var(--color-icon-gray);
+}
+
+.action-button:first-child .material-icons:hover {
+  color: var(--color-dark-blue);
+  transform: scale(1.2);
+}
+
+.action-button:last-child .material-icons:hover {
+  color: var(--color-icon-red);
+  transform: scale(1.2);
+}
+
 .add-book {
   display: flex;
-  gap: 10px;
+  gap: max-content;
 }
 
 .add-book button {
@@ -144,24 +181,11 @@ table tfoot td:last-child {
   font-weight: bold;
 }
 
-.add-button {
-  margin-right: 392px;
-
-}
-
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  /* visibility: hidden; */
-  /* width: 0;
-  opacity: 0;
-  transform: opacity 2s 3s;
-  transition: width 3s ; */
-  max-width: 0;
-  overflow: hidden;
-  transition: max-width 3s ease-out;
 }
 
 .form-row {

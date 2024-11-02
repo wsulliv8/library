@@ -1,26 +1,25 @@
+let log = console.log;
+const myLibrary = [];
 let tableBody = document.querySelector('tbody');
 let form = document.querySelector('form');
 let inputs = document.querySelectorAll('input');
-let addButton = document.querySelector(".add-button");
-let submitButton = document.querySelector(".submit");
-addButton.addEventListener('click', () => {
-  form.style.maxWidth = '100%';
-  addButton.style.marginRight = '0';
-})
-submitButton.addEventListener('click', () => {
-  console.log(inputs.values());
-  let newBook = new Book(...inputs.values());
+let deleteButton = document.querySelector('.action-button');
+form.addEventListener('submit',(event)=> {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  let haveRead = formData.get('have_read')==='on' ? 'Yes' : 'No';
+  let newBook = new Book(formData.get('title'), formData.get('author'), haveRead, formData.get('number_pages'))
+
   addBook(newBook);
   form.reset();
-
-  form.style.maxWidth = '0';
-  addButton.style.transition = 'margin-right 0s 2.88s';
-  addButton.style.marginRight = '392px';
 })
-let log = console.log;
-const myLibrary = [];
+deleteButton.addEventListener('click', () => {
 
-function Book (title, author, pages, read) {
+})
+
+
+function Book (title, author, read, pages) {
   this.title = title;
   this.author = author;
   this.read = read;
@@ -35,31 +34,48 @@ Book.prototype.info = function () {
 }
 
 function addBook() {
+
   for (let i = 0; i < arguments.length; i++) {
     myLibrary.push(arguments[i]);
   }
-  displayBooks();
+
+  displayBooks(arguments.length);
   return;
 }
 
-function displayBooks() {
-  myLibrary.forEach((book) => {
+function displayBooks(numbBooks = myLibrary.length) {
+
+  for (let i = myLibrary.length-numbBooks; i < myLibrary.length; i++){
+
     let newRow = document.createElement('tr');
-    for (const prop in book){
-      if(typeof book[prop] === 'function') continue;
-      let data = document.createElement('td');
-      data.innerText = book[prop];
-      newRow.appendChild(data);
+    let book = myLibrary[i];
+    for (const bookData in book){
+      if(typeof book[bookData] === 'function') continue;
+      let tableData = document.createElement('td');
+      tableData.innerText = book[bookData];
+      newRow.appendChild(tableData);
     }
+    //create actions buttons
+    newRow.insertAdjacentHTML('beforeend', 
+      `<td>
+        <button type="button" class="action-button" data-index="${i}">
+          <span class="material-icons">edit</span>
+        </button>
+      <button type="button" class="action-button" data-index="${i}">
+        <span class="material-icons">close</span>
+      </button>
+      </td>`
+    );
+
     tableBody.appendChild(newRow);
-  })
+  }
   return;
 }
 
 
-let book = new Book('The Hobbit', 'J.R.R. Tolkien',198, 0);
-let bookTwo = new Book('The WoT', 'Old Guy',600, 1);
-let bookThree = new Book('Narnia', 'C.S. Lewis',450, 0);
+let book = new Book('The Hobbit', 'J.R.R. Tolkien','No', 198);
+let bookTwo = new Book('The WoT', 'Old Guy','Yes', 600);
+let bookThree = new Book('Narnia', 'C.S. Lewis','No', 450);
 
 addBook(book, bookTwo, bookThree);
 
