@@ -3,7 +3,6 @@ const myLibrary = [];
 let tableBody = document.querySelector('tbody');
 let form = document.querySelector('form');
 let inputs = document.querySelectorAll('input');
-let deleteButton = document.querySelector('.action-button');
 form.addEventListener('submit',(event)=> {
   event.preventDefault();
 
@@ -14,10 +13,6 @@ form.addEventListener('submit',(event)=> {
   addBook(newBook);
   form.reset();
 })
-deleteButton.addEventListener('click', () => {
-
-})
-
 
 function Book (title, author, read, pages) {
   this.title = title;
@@ -38,8 +33,7 @@ function addBook() {
   for (let i = 0; i < arguments.length; i++) {
     myLibrary.push(arguments[i]);
   }
-
-  displayBooks(arguments.length);
+  displayBooks(arguments.length)
   return;
 }
 
@@ -58,16 +52,25 @@ function displayBooks(numbBooks = myLibrary.length) {
     //create actions buttons
     newRow.insertAdjacentHTML('beforeend', 
       `<td>
-        <button type="button" class="action-button" data-index="${i}">
-          <span class="material-icons">edit</span>
+        <button type="button" class="action-button">
+          <span class="material-icons edit" data-index="${i}">edit</span>
         </button>
-      <button type="button" class="action-button" data-index="${i}">
-        <span class="material-icons">close</span>
+      <button type="button" class="action-button"s>
+        <span class="material-icons close" data-index="${i}">close</span>
       </button>
       </td>`
     );
-
     tableBody.appendChild(newRow);
+
+    let deleteButton = document.querySelector(`.material-icons.close[data-index="${i}"`);
+    deleteButton.addEventListener('click', (event) => {
+      //update DOM data attribute and myLibrary
+      let index = +event.target.dataset.index;
+      let buttons = document.querySelectorAll('.material-icons.close');
+      for (let j = index; j<buttons.length; j++) buttons[j].dataset.index--;
+      myLibrary.splice(index++, 1);
+      document.querySelector(`tbody tr:nth-child(${index})`).remove();
+    })
   }
   return;
 }
