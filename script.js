@@ -50,12 +50,17 @@ function displayBooks(numbBooks = myLibrary.length) {
       newRow.appendChild(tableData);
     }
     //create actions buttons
+    let checkedBool = myLibrary[i].read==='Yes' ? "checked" : ""; 
     newRow.insertAdjacentHTML('beforeend', 
       `<td>
+        <label id="switch">
+          <input type="checkbox" data-index="${i}" ${checkedBool}>
+          <span class="slider"></span>
+        </label> 
         <button type="button" class="action-button">
           <span class="material-icons edit" data-index="${i}">edit</span>
         </button>
-      <button type="button" class="action-button"s>
+      <button type="button" class="action-button">
         <span class="material-icons close" data-index="${i}">close</span>
       </button>
       </td>`
@@ -67,9 +72,22 @@ function displayBooks(numbBooks = myLibrary.length) {
       //update DOM data attribute and myLibrary
       let index = +event.target.dataset.index;
       let buttons = document.querySelectorAll('.material-icons.close');
-      for (let j = index; j<buttons.length; j++) buttons[j].dataset.index--;
+      let switches = document.querySelectorAll('switch input');
+      for (let j = index; j<buttons.length; j++) {
+        buttons[j].dataset.index--;
+        switches[j].dataset.index--;
+      }
       myLibrary.splice(index++, 1);
       document.querySelector(`tbody tr:nth-child(${index})`).remove();
+    })
+
+    let toggleSwitch = document.querySelector(`input[data-index="${i}"]`);
+    toggleSwitch.addEventListener('change', function(event) {
+      let index = +event.target.dataset.index;
+      myLibrary[index].read = this.checked ? 'Yes' : 'No';
+      index++;
+      document.querySelector(`tr:nth-child(${index}) td:nth-child(3)`)
+        .innerText = myLibrary[--index].read;
     })
   }
   return;

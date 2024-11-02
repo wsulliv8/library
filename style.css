@@ -67,7 +67,7 @@ body {
 
 table {
   table-layout: fixed;
-  width: clamp(450px, 85%, 800px);
+  width: clamp(540px, 90%, 1000px);
   border-collapse: collapse;
   position: relative;
 }
@@ -101,7 +101,7 @@ thead th:nth-child(4) {
 }
 
 thead th:nth-child(5) {
-  width: 15%;
+  width: 20%;
 }
 
 tbody,
@@ -146,6 +146,53 @@ table tfoot td:last-child {
   border-bottom-right-radius: 14px;
 }
 
+#switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 24px;
+  margin-right: .4rem;
+}
+
+#switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--color-icon-gray);
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  width: 16px;
+  height: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--color-tan);
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--color-dark-blue);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(12px);
+  transform: translateX(12px);
+  -ms-transform: translateX(12px);
+}
+
 .action-button {
   background-color: transparent;
   border: none;
@@ -156,12 +203,12 @@ table tfoot td:last-child {
   color: var(--color-icon-gray);
 }
 
-.action-button:first-child .material-icons:hover {
+.material-icons.edit:hover {
   color: var(--color-dark-blue);
   transform: scale(1.2);
 }
 
-.action-button:last-child .material-icons:hover {
+.material-icons.close:hover {
   color: var(--color-icon-red);
   transform: scale(1.2);
 }
@@ -203,10 +250,6 @@ form {
 .form-row > div {
   display: flex;
   width: 30ch;
-}
-
-label[for='checkbox'] {
-  margin-left: 2rem;
 }
 
 .add-book form button {

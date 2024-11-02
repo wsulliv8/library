@@ -45,9 +45,12 @@
         <label for="pages"># of Pages: </label>
         <div>
           <input type="number" id="pages" min="1" max="10000" size="6" name="number_pages">
-          <div>
+          <div class="form-row">
             <label for="checkbox">Have Read: </label>
-            <input type="checkbox" id="checkbox" name='have_read'>
+            <label for="checkbox" id="switch">
+              <input type="checkbox" id="checkbox" name='have_read'>
+              <span class="slider"></span>
+            </label>
           </div>
         </div>
       </div>
